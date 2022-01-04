@@ -4,11 +4,11 @@ import json
 class JiraHandler:
     def __init__(self, filename):
         self.filename = filename
-    def prepSummary(self, payload):
+    def prepSummary(self, issue_id):
         payload = json.dumps( {
                                 "fields": {
                                     "project": {
-                                    "key": payload
+                                    "key": "AA"
                                     },
                                     "summary": "Automated page creation/modification",
                                     "issuetype": {
@@ -39,9 +39,7 @@ class JiraHandler:
         if issue_id:
             payload = self.prepSummary(issue_id)  
             new_issue = jira.create_issue(payload)
-            print(new_issue)
             #Attaches the *.txt files under /tmp directory.
-            filepath = r"C:\Users\thepr\Downloads\India Holiday List - 2022.pdf"
             files = {
                         "file": (self.filename, open(self.filename,"rb"), "application-type")
                     }
@@ -51,6 +49,6 @@ class JiraHandler:
 
     def create_ticket(self):
         user = 'aem.poc.2021@gmail.com'
-        pswd = 'RkIWhtq5IhAudvwDlEl3A26D'
+        pswd = '4riwCAaqb7bPmpGVWh7i318E'
         host = 'https://aempoc.atlassian.net/'
         return self.jiraConnect(user, pswd, host)
